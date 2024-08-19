@@ -44,10 +44,12 @@ class getStartedScreen extends StatelessWidget {
         child: ElevatedButton(
           style: ElevatedButton.styleFrom(backgroundColor: Colors.black),
           onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => HomeScreen()),
-            );
+            Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => HomeScreen(),
+                ),
+                (route) => false);
           },
           child: Container(
             child: Row(
