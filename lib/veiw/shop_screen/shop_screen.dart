@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 
 class Shopscreen extends StatelessWidget {
-  const Shopscreen({super.key});
+  final String imageUrl;
+  final String Title;
+  final String Des;
+  final String Price;
+  const Shopscreen({super.key, required this.imageUrl, required this.Title, required this.Des, required this.Price});
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +59,7 @@ class Shopscreen extends StatelessWidget {
                     width: 400,
                     decoration: BoxDecoration(
                         image: DecorationImage(
-                            image: AssetImage("assets/image/one.jpeg"),
+                            image: NetworkImage(imageUrl),
                             fit: BoxFit.cover),
                         borderRadius: BorderRadius.circular(12)),
                   ),
@@ -79,7 +83,7 @@ class Shopscreen extends StatelessWidget {
               ),
               SizedBox(height: 10),
               Text(
-                "Roadster",
+                Title,
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
               ),
               Row(
@@ -108,7 +112,7 @@ class Shopscreen extends StatelessWidget {
                 height: 15,
               ),
               Text(
-                "White and black striped pullover ,has a round neck, long sleeves, ribbed hem.",
+                Des,
                 style: TextStyle(
                     color: Colors.grey,
                     fontWeight: FontWeight.bold,
@@ -197,7 +201,7 @@ class Shopscreen extends StatelessWidget {
                         color: Colors.blueGrey),
                   ),
                   Text(
-                    "INR:-15,299",
+                    "INR:-$Price",
                     style: TextStyle(
                         fontWeight: FontWeight.w600,
                         fontSize: 20,
