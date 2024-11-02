@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:uisampleaug16/controller/catecory_controller.dart';
 import 'package:uisampleaug16/controller/home_screen_controller.dart';
+import 'package:uisampleaug16/controller/shop_screen_controller.dart';
 import 'package:uisampleaug16/veiw/getstarted_screen/getstarted_screen.dart';
 
 
@@ -17,7 +17,7 @@ class myApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) =>HomeScreenController(),),
-        ChangeNotifierProvider(create: (context) => CatecoryController(),)
+        ChangeNotifierProvider(create: (context) => ShopScreenController(),)
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
