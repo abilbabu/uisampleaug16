@@ -1,6 +1,9 @@
+import 'package:custom_rating_bar/custom_rating_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:uisampleaug16/controller/cart_screen_controller.dart';
 import 'package:uisampleaug16/controller/shop_screen_controller.dart';
+import 'package:uisampleaug16/veiw/cart_screen/cart_screen.dart';
 
 class Shopscreen extends StatefulWidget {
   const Shopscreen({super.key, required this.productId});
@@ -87,15 +90,9 @@ class _ShopscreenState extends State<Shopscreen> {
                                                   .toString()))),
                                   child: Container(
                                     decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        borderRadius: BorderRadius.circular(10),
-                                        boxShadow: [
-                                          BoxShadow(
-                                              offset: Offset(6, 10),
-                                              blurRadius: 10,
-                                              color:
-                                                  Colors.black.withOpacity(.5))
-                                        ]),
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
                                     padding: EdgeInsets.all(10),
                                     child: Icon(
                                       Icons.favorite_outline,
@@ -112,13 +109,25 @@ class _ShopscreenState extends State<Shopscreen> {
                                       fontSize: 18),
                                 ),
                                 SizedBox(height: 20),
-                                Text(
-                                  productDetailsController.product!.rating
-                                      .toString(),
-                                  style: TextStyle(
-                                      color: Colors.amber,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 16),
+                                Row(
+                                  children: [
+                                    RatingBar.readOnly(
+                                      filledIcon: Icons.star,
+                                      emptyIcon: Icons.star_border,
+                                      initialRating: productDetailsController
+                                              .product?.rating?.rate ??
+                                          0,
+                                      maxRating: 5,
+                                      size: 20,
+                                    ),
+                                    Text(
+                                      "(${productDetailsController.product!.rating!.count.toString()},count)",
+                                      style: TextStyle(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 16),
+                                    ),
+                                  ],
                                 ),
                                 SizedBox(height: 20),
                                 Text(
@@ -230,7 +239,19 @@ class _ShopscreenState extends State<Shopscreen> {
                             Expanded(
                               child: InkWell(
                                 onTap: () {
-                                  //push
+                                  context
+                                      .read<CartScreenController>()
+                                      .addProduct(
+                                          productDetailsController.product!);
+                                  context
+                                      .read<CartScreenController>()
+                                      .getAllProduct();
+
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => CartScreen(),
+                                      ));
                                 },
                                 child: Container(
                                   padding: EdgeInsets.symmetric(

@@ -14,9 +14,9 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback(
-      (timeStamp) async {
+      (timeStamp) async {      
         await context.read<HomeScreenController>().getCategory();
-        await context.read<HomeScreenController>().getProduct();       
+        await context.read<HomeScreenController>().getProduct();          
       },
     );
     super.initState();

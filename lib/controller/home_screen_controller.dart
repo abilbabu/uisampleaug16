@@ -37,7 +37,7 @@ class HomeScreenController with ChangeNotifier {
     notifyListeners();
   }
 
-// category data fetch
+// category datafetch
   getCategory() async {
     isloading = true;
     notifyListeners();
@@ -60,13 +60,13 @@ class HomeScreenController with ChangeNotifier {
     notifyListeners();
   }
 
+// Category data select section
   onCategorySelection(int clickedIndex) async {
     if(selectedIndexCategory != clickedIndex && isProductloading == false){
        selectedIndexCategory = clickedIndex;
     print(selectedIndexCategory);
     notifyListeners();
     }
-   
     await getProduct();
   }
 }
