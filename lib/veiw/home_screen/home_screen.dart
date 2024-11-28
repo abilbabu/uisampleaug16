@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:uisampleaug16/controller/cart_screen_controller.dart';
 import 'package:uisampleaug16/controller/home_screen_controller.dart';
+import 'package:uisampleaug16/veiw/cart_screen/cart_screen.dart';
 import 'package:uisampleaug16/veiw/shop_screen/shop_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -14,9 +16,10 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback(
-      (timeStamp) async {      
+      (timeStamp) async {
+        await context.read<CartScreenController>().getAllProduct();
         await context.read<HomeScreenController>().getCategory();
-        await context.read<HomeScreenController>().getProduct();          
+        await context.read<HomeScreenController>().getProduct();
       },
     );
     super.initState();
@@ -53,11 +56,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                   },
                                   child: Container(
                                     decoration: BoxDecoration(
-                                        color:
-                                            homeController.selectedIndexCategory ==
-                                                    index
-                                                ? Colors.black
-                                                : Colors.white,
+                                        color: homeController
+                                                    .selectedIndexCategory ==
+                                                index
+                                            ? Colors.black
+                                            : Colors.white,
                                         borderRadius: BorderRadius.circular(15),
                                         border: Border.all(
                                           color: Color(0xFF7D7C7C),
@@ -110,15 +113,22 @@ class _HomeScreenState extends State<HomeScreen> {
                                             children: [
                                               ElevatedButton(
                                                 onPressed: () {
-                                                  if(homeController.productList[index].id !=null){
+                                                  if (homeController
+                                                          .productList[index]
+                                                          .id !=
+                                                      null) {
                                                     Navigator.push(
-                                                    context,
-                                                    MaterialPageRoute(
-                                                        builder: (context) =>
-                                                            Shopscreen(
-                                                              productId: homeController.productList[index].id!,
-                                                            )),
-                                                  );
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              Shopscreen(
+                                                                productId:
+                                                                    homeController
+                                                                        .productList[
+                                                                            index]
+                                                                        .id!,
+                                                              )),
+                                                    );
                                                   }
                                                 },
                                                 child: Container(
@@ -230,8 +240,22 @@ class _HomeScreenState extends State<HomeScreen> {
         "Discover",
         style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
       ),
-      actions: const [
-        Stack(
+      actions: [
+        IconButton(
+          onPressed: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => CartScreen(),
+                ));
+          },
+          icon: const Icon(
+            Icons.shopping_cart_outlined,
+            color: Colors.black,
+            size: 30,
+          ),
+        ),
+        const Stack(
           children: [
             Icon(
               Icons.notifications_none_outlined,
@@ -251,7 +275,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ))
           ],
         ),
-        SizedBox(
+        const SizedBox(
           width: 15,
         )
       ],

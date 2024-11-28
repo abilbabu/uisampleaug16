@@ -226,8 +226,8 @@ class _ShopscreenState extends State<Shopscreen> {
                                       color: Colors.grey, fontSize: 16),
                                 ),
                                 Text(
-                                  productDetailsController.product!.price
-                                      .toString(),
+                                 "\$ ${productDetailsController.product!.price
+                                      .toString()}",
                                   style: TextStyle(
                                       color: Colors.black,
                                       fontWeight: FontWeight.bold,
